@@ -18,8 +18,23 @@ interpret source pages in the browser.
 
 ## Installation
 
-Install the repository as a HACS dashboard plugin, or copy `dist/ha-school-year-card.js` to
-Home Assistant's `www` directory and register it as a JavaScript module resource.
+School Year `0.1.11` or newer is required.
+
+### HACS
+
+1. Open **HACS > Dashboard**.
+2. Open the menu and select **Custom repositories**.
+3. Add `https://github.com/Caine72/ha-school-year-card` with the category **Dashboard**.
+4. Find **School Year Card** in HACS and install the latest version.
+5. Refresh the browser.
+
+### Manual
+
+1. Download `ha-school-year-card.js` from the latest GitHub release.
+2. Copy it to Home Assistant's `www` directory.
+3. Open **Settings > Dashboards**, open the menu, and select **Resources**.
+4. Add `/local/ha-school-year-card.js` as a **JavaScript module** resource.
+5. Refresh the browser.
 
 ## Configuration
 
