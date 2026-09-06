@@ -1,0 +1,24 @@
+name: Release artifact
+on:
+  release:
+    types: [published]
+permissions:
+  contents: write
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    env: { COREPACK_ENABLE_DOWNLOAD_PROMPT: 0 }
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
+        with: { node-version: 24, package-manager-cache: false }
+      - name: Verify release tag
+        run: node -e "if (!/^v?\\d+\\.\\d+\\.\\d+$/.test(process.env.GITHUB_REF_NAME)) process.exit(1)"
+      - run: corepack enable && corepack prepare yarn@4.12.0 --activate && yarn install --immutable && yarn validate
+      - uses: svenstaro/upload-release-action@29e53e917877a24fad85510ded594ab3c9ca12de # v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: dist/ha-school-year-card.js
+          asset_name: ha-school-year-card.js
+          tag: ${{ github.ref }}
+          overwrite: true
