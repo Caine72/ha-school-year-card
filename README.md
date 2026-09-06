@@ -5,6 +5,8 @@ A Home Assistant Lovelace card that presents closures from the
 mobile-friendly timeline. It uses the integration's normalized data and does not scrape or
 interpret source pages in the browser.
 
+![School Year Card showing the next break and the school-year timeline](docs/images/school-year-card.png)
+
 ## Features
 
 - Highlights the active or next school break with an inclusive countdown.
