@@ -1,0 +1,21 @@
+name: Prevent npm lockfiles
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  guard:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - name: Reject npm lockfiles
+        run: |
+          set -e
+          files=$(find . -type f \( -name package-lock.json -o -name npm-shrinkwrap.json \) -not -path './node_modules/*')
+          test -z "$files" || { echo "$files"; exit 1; }
